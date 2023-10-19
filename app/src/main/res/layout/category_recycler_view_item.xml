@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="model"
+            type="com.example.mediastreaming.data.models.VideoRecyclerItem" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@drawable/placeholder_image"
+            app:imageURL="@{model.thumbnailURL}"
+            android:scaleType="centerCrop"
+            app:clipOutline="@{true}"
+            android:background="@drawable/background_blue_border"/>
+
+        <TextView
+            android:id="@+id/descriptionTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:textSize="15.5sp"
+            android:maxLines="3"
+            tools:text="Course Details and descriptions"
+            android:text="@{model.videoTitle}"
+            app:layout_constraintTop_toBottomOf="@+id/thumbnail"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/channelNameTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Channel Name"
+            android:textSize="13sp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/roboto_regular"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionTV"
+            tools:layout_editor_absoluteX="40dp" />
+
+        <TextView
+            android:id="@+id/reviewV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Review (4.3)"
+            android:layout_marginTop="4dp"
+            android:textColor="#CCAC01"
+            app:layout_constraintTop_toBottomOf="@+id/channelNameTV"
+            tools:layout_editor_absoluteX="40dp" />
+
+        <TextView
+            android:id="@+id/priceTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="$220"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/roboto_bold"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/reviewV"
+            tools:layout_editor_absoluteX="49dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
