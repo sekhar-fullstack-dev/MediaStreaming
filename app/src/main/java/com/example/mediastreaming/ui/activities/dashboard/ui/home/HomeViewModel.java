@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
-import com.example.mediastreaming.data.models.VideoRecyclerItem;
+import com.example.mediastreaming.data.models.responses.VideoRecyclerItem;
 import com.example.mediastreaming.data.remote.repos.HomeFragmentRepository;
 
 import java.util.ArrayList;

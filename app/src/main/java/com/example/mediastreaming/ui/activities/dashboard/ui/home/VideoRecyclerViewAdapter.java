@@ -2,16 +2,14 @@ package com.example.mediastreaming.ui.activities.dashboard.ui.home;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mediastreaming.data.models.VideoRecyclerItem;
+import com.example.mediastreaming.data.models.responses.VideoRecyclerItem;
 import com.example.mediastreaming.databinding.CategoryRecyclerViewBinding;
-import com.example.mediastreaming.databinding.VideoRecycleviewItemBinding;
 
 import java.util.ArrayList;
 import java.util.Collections;

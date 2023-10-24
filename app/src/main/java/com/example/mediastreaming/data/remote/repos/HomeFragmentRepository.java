@@ -4,14 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.mediastreaming.data.models.VideoRecyclerItem;
+import com.example.mediastreaming.data.models.responses.VideoRecyclerItem;
 import com.example.mediastreaming.data.models.requestbodies.VideoRecyclerItemRequestBody;
 import com.example.mediastreaming.data.models.responses.VideoRecyclerViewItemResponse;
 import com.example.mediastreaming.data.utils.APIs;
 import com.example.mediastreaming.data.utils.RetrofitClient;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 

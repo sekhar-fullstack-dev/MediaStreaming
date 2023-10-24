@@ -1,4 +1,4 @@
-package com.example.mediastreaming.data.models;
+package com.example.mediastreaming.data.models.responses;
 
 import androidx.annotation.NonNull;
 

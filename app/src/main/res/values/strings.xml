@@ -49,4 +49,9 @@
     <string name="title_notifications">Notifications</string>
 
     <string name="title_activity_livestream">Live Stream</string>
+    <string name="live_streams">Live Streams</string>
+    <string name="black_board">Black Board</string>
+    <string name="stream_name">Stream name</string>
+    <string name="description">Description</string>
+    <string name="create_stream">Create Stream</string>
 </resources>

@@ -8,14 +8,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.media3.common.util.UnstableApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mediastreaming.MainActivity;
-import com.example.mediastreaming.data.models.VideoRecyclerItem;
+import com.example.mediastreaming.data.models.responses.VideoRecyclerItem;
 import com.example.mediastreaming.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;

@@ -10,18 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.mediastreaming.databinding.FragmentNotificationsBinding;
+import com.example.mediastreaming.databinding.FragmentBlackBoardBinding;
 
-public class NotificationsFragment extends Fragment {
+public class BlackboardFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
+    private FragmentBlackBoardBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         NotificationsViewModel notificationsViewModel =
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentBlackBoardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;

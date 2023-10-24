@@ -12,15 +12,15 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.mediastreaming.ui.activities.dashboard.ui.dashboard.DashboardFragment"
+        android:id="@+id/navigation_livestreams"
+        android:name="com.example.mediastreaming.ui.activities.dashboard.ui.liveStream.LiveStreamFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_livestream" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.mediastreaming.ui.activities.dashboard.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_blackboard"
+        android:name="com.example.mediastreaming.ui.activities.dashboard.ui.notifications.BlackboardFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_black_board" />
 
 </navigation>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="model"
-            type="com.example.mediastreaming.data.models.VideoRecyclerItem" />
+            type="com.example.mediastreaming.data.models.responses.VideoRecyclerItem" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:padding="5dp">
@@ -20,7 +20,8 @@
             app:imageURL="@{model.thumbnailURL}"
             android:scaleType="centerCrop"
             app:clipOutline="@{true}"
-            android:background="@drawable/background_blue_border"/>
+            android:background="@drawable/background_blue_border"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/descriptionTV"

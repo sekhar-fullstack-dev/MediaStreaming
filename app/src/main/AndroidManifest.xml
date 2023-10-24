@@ -38,7 +38,11 @@
             android:name=".ui.activities.dashboard.DashboardActivity"
             android:exported="true"
             android:label="@string/title_activity_dashboard" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".base.BaseActivity"
@@ -49,7 +53,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.MediaStreaming">
+            android:theme="@style/FullScreenTheme">
         </activity>
         <activity android:name=".ui.activities.liveStream.LiveStreamActivity"
             android:exported="true"
@@ -61,11 +65,6 @@
             android:exported="true"
             android:label="RTMP"
             android:theme="@style/Theme.MediaStreaming">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

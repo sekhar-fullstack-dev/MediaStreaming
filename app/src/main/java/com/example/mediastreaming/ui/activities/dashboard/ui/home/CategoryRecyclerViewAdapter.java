@@ -1,6 +1,6 @@
 package com.example.mediastreaming.ui.activities.dashboard.ui.home;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mediastreaming.MainActivity;
-import com.example.mediastreaming.data.models.VideoRecyclerItem;
+import com.example.mediastreaming.data.models.responses.VideoRecyclerItem;
 import com.example.mediastreaming.databinding.CategoryRecyclerViewItemBinding;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryRecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CategoryRecyclerViewAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.binding.setModel(itemList.get(position));
         holder.binding.thumbnail.setOnClickListener(new View.OnClickListener() {
             @Override

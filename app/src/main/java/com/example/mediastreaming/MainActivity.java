@@ -3,6 +3,7 @@ package com.example.mediastreaming;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,7 +13,11 @@ import androidx.media3.common.MediaItem;
 import androidx.media3.common.util.UnstableApi;
 import androidx.media3.common.util.Util;
 import androidx.media3.datasource.DataSource;
+import androidx.media3.datasource.DefaultDataSourceFactory;
+import androidx.media3.datasource.DefaultHttpDataSource;
 import androidx.media3.exoplayer.ExoPlayer;
+import androidx.media3.exoplayer.hls.HlsMediaSource;
+import androidx.media3.exoplayer.source.MediaSource;
 import androidx.media3.extractor.DefaultExtractorsFactory;
 import androidx.media3.extractor.ExtractorsFactory;
 
@@ -61,6 +66,17 @@ public class  MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         Log.d(TAG, "onResume: ");
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE
+                        // Set the content to appear under the system bars so that the
+                        // content doesn't resize when the system bars hide and show.
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        // Hide the nav bar and status bar
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
         super.onResume();
         if (Util.SDK_INT<=23 || player==null){
             initialisePlayer();
@@ -90,20 +106,23 @@ public class  MainActivity extends BaseActivity {
     private void initialisePlayer(){
         try {
             if (player==null){
-                DataSource.Factory dataSourceFactory =  new EncryptedDatasourceFactory(Constants.AES_KEY);
-                ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
                 player = new ExoPlayer.Builder(getApplicationContext()).build();
                 binding.playerView.setPlayer(player);
                 if(!videoURL.isEmpty()){
-                    MediaItem mediaItem = MediaItem.fromUri(Uri.parse(videoURL));
-                    player.setMediaItem(mediaItem);
-                    player.prepare();
-                    player.seekTo(playbackPosition);
-                    player.setPlayWhenReady(playWhenReady);
-                /*MediaSource mediaSource = new HlsMediaSource.Factory(dataSourceFactory).createMediaSource(mediaItem);
-                player.setMediaSource(mediaSource);
-                player.prepare();
-                player.play();*/
+                    if(videoURL.contains("index.m3u8")){
+                        HlsMediaSource hlsMediaSource = new HlsMediaSource.Factory(new DefaultDataSourceFactory(this, "MediaStreaming"))
+                                .createMediaSource(MediaItem.fromUri(videoURL));
+                        player.setMediaSource(hlsMediaSource);
+                        player.prepare();
+                        player.setPlayWhenReady(playWhenReady);
+                    }
+                    else{
+                        MediaItem mediaItem = MediaItem.fromUri(Uri.parse(videoURL));
+                        player.setMediaItem(mediaItem);
+                        player.prepare();
+                        player.seekTo(playbackPosition);
+                        player.setPlayWhenReady(playWhenReady);
+                    }
                 }
             }
         }

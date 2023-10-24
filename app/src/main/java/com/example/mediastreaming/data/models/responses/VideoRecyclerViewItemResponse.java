@@ -1,6 +1,5 @@
 package com.example.mediastreaming.data.models.responses;
 
-import com.example.mediastreaming.data.models.VideoRecyclerItem;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;

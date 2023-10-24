@@ -1,8 +1,11 @@
 package com.example.mediastreaming.ui.activities.rtmps;
 
+import static com.example.mediastreaming.utils.Utils.displayHeight;
+import static com.example.mediastreaming.utils.Utils.displayWidth;
+
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
+import android.util.Log;
 
 
 import androidx.annotation.NonNull;
@@ -11,17 +14,19 @@ import androidx.databinding.DataBindingUtil;
 import com.example.mediastreaming.R;
 import com.example.mediastreaming.base.BaseActivity;
 import com.example.mediastreaming.databinding.ActivityRtmpsBinding;
+import com.example.mediastreaming.utils.Constants;
 import com.pedro.encoder.input.video.CameraHelper;
 import com.pedro.library.rtmp.RtmpCamera1;
-import com.pedro.library.view.OpenGlView;
 import com.pedro.rtmp.utils.ConnectCheckerRtmp;
 
 public class RtmpsActivity extends BaseActivity {
     private RtmpCamera1 rtmpCamera1;
     private ActivityRtmpsBinding binding;
+    private String streamKey;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        streamKey = getIntent().getStringExtra("streamKey");
         binding = DataBindingUtil.setContentView(this,R.layout.activity_rtmps);
         binding.setLifecycleOwner(this);
         new Handler().postDelayed(new Runnable() {
@@ -71,9 +76,12 @@ public class RtmpsActivity extends BaseActivity {
 
     private void startStream() {
         int rotation = CameraHelper.getCameraOrientation(this);
+        int height = (int) (640*(displayHeight(this)/displayWidth(this)));
+        int width = 640;
         if (!rtmpCamera1.isStreaming()) {
-            if (rtmpCamera1.prepareAudio() && rtmpCamera1.prepareVideo(640*2, 480*2, 30, 1228800, rotation)) {
-                rtmpCamera1.startStream("rtmp://192.168.76.60:1935/live/test");
+            if (rtmpCamera1.prepareAudio() && rtmpCamera1.prepareVideo(640, 480, 30, 1228800, rotation)) {
+                rtmpCamera1.startStream("rtmp://"+ Constants.RTMP_STREAM_IP +"/live/"+streamKey);
+                Log.d(getClass().getName(), "startStream: "+streamKey);
             } else {
                 // Handle error, e.g., show a Toast
             }
