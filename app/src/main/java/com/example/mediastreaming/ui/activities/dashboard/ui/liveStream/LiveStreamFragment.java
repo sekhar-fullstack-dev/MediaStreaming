@@ -48,7 +48,7 @@ public class LiveStreamFragment extends Fragment {
         model.getText().observe(getViewLifecycleOwner(), binding.textDashboard::setText);
         model.streamKey.observe(requireActivity(), s -> {
             if(s!=null && !s.isEmpty()){
-                Intent intent = new Intent(requireActivity(), RtmpsActivity.class);
+                Intent intent = new Intent(getContext(), RtmpsActivity.class);
                 intent.putExtra("streamKey",s);
                 startActivity(intent);
             }

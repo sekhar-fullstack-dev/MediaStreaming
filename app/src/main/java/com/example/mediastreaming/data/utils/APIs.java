@@ -17,6 +17,9 @@ public interface APIs {
     @POST("/getFile")
     Call<VideoRecyclerViewItemResponse> getVideoRecyclerItems(@Body VideoRecyclerItemRequestBody body);
 
+    @GET("/getMath")
+    Call<VideoRecyclerViewItemResponse> getVideoRecyclerItems2();
+
     @POST("/startStream")
     Call<CreateStreamResponse> createStream(@Body JSONObject body);
 

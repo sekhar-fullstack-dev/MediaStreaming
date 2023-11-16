@@ -29,7 +29,21 @@ public class HomeFragmentRepository {
 
     public void getVideoRecyclerViewItems() {
         VideoRecyclerItemRequestBody input = new VideoRecyclerItemRequestBody();
-        apIs.getVideoRecyclerItems(input).enqueue(new Callback<VideoRecyclerViewItemResponse>() {
+        /***for game of thrones***/
+        /*apIs.getVideoRecyclerItems(input).enqueue(new Callback<VideoRecyclerViewItemResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<VideoRecyclerViewItemResponse> call, @NonNull Response<VideoRecyclerViewItemResponse> response) {
+                assert response.body() != null;
+                videoRecyclerItemList.postValue(response.body().getData());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<VideoRecyclerViewItemResponse> call, @NonNull Throwable t) {
+                videoRecyclerItemList.postValue(null);
+            }
+        });*/
+        /***for math videos***/
+        apIs.getVideoRecyclerItems2().enqueue(new Callback<VideoRecyclerViewItemResponse>() {
             @Override
             public void onResponse(@NonNull Call<VideoRecyclerViewItemResponse> call, @NonNull Response<VideoRecyclerViewItemResponse> response) {
                 assert response.body() != null;
