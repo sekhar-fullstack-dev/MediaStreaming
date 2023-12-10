@@ -23,55 +23,57 @@ public class RtmpsActivity extends BaseActivity {
     private RtmpCamera1 rtmpCamera1;
     private ActivityRtmpsBinding binding;
     private String streamKey;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         streamKey = getIntent().getStringExtra("streamKey");
         binding = DataBindingUtil.setContentView(this,R.layout.activity_rtmps);
         binding.setLifecycleOwner(this);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                rtmpCamera1 = new RtmpCamera1(binding.openGL, new ConnectCheckerRtmp() {
-                    @Override
-                    public void onConnectionStartedRtmp(@NonNull String s) {
+        askCameraAndMicPermission();
+    }
 
-                    }
+    @Override
+    protected void onCameraMicPermissionResult(boolean isPermission) {
+        if(isPermission){
+            rtmpCamera1 = new RtmpCamera1(binding.openGL, new ConnectCheckerRtmp() {
+                @Override
+                public void onConnectionStartedRtmp(@NonNull String s) {
 
-                    @Override
-                    public void onConnectionSuccessRtmp() {
+                }
 
-                    }
+                @Override
+                public void onConnectionSuccessRtmp() {
 
-                    @Override
-                    public void onConnectionFailedRtmp(@NonNull String s) {
+                }
 
-                    }
+                @Override
+                public void onConnectionFailedRtmp(@NonNull String s) {
 
-                    @Override
-                    public void onNewBitrateRtmp(long l) {
+                }
 
-                    }
+                @Override
+                public void onNewBitrateRtmp(long l) {
 
-                    @Override
-                    public void onDisconnectRtmp() {
+                }
 
-                    }
+                @Override
+                public void onDisconnectRtmp() {
 
-                    @Override
-                    public void onAuthErrorRtmp() {
+                }
 
-                    }
+                @Override
+                public void onAuthErrorRtmp() {
 
-                    @Override
-                    public void onAuthSuccessRtmp() {
+                }
 
-                    }
-                });
-                // Assuming you have a button or some trigger to start the stream:
-                binding.stream.setOnClickListener(v -> startStream());
-            }
-        },600);
+                @Override
+                public void onAuthSuccessRtmp() {
+
+                }
+            });
+            binding.stream.setOnClickListener(v -> startStream());
+        }
     }
 
     private void startStream() {
@@ -101,7 +103,7 @@ public class RtmpsActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (!rtmpCamera1.isStreaming()) {
+        if (rtmpCamera1!=null && !rtmpCamera1.isStreaming()) {
             rtmpCamera1.stopPreview();
         }
     }

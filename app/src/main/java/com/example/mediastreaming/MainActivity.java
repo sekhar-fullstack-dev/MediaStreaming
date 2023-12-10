@@ -2,14 +2,19 @@ package com.example.mediastreaming;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.media3.common.MediaItem;
+import androidx.media3.common.Player;
+import androidx.media3.common.VideoSize;
 import androidx.media3.common.util.UnstableApi;
 import androidx.media3.common.util.Util;
 import androidx.media3.datasource.DataSource;
@@ -20,6 +25,7 @@ import androidx.media3.exoplayer.hls.HlsMediaSource;
 import androidx.media3.exoplayer.source.MediaSource;
 import androidx.media3.extractor.DefaultExtractorsFactory;
 import androidx.media3.extractor.ExtractorsFactory;
+import androidx.media3.ui.AspectRatioFrameLayout;
 
 import com.example.mediastreaming.base.BaseActivity;
 import com.example.mediastreaming.data.utils.EncryptedDatasourceFactory;
@@ -108,8 +114,12 @@ public class  MainActivity extends BaseActivity {
             if (player==null){
                 player = new ExoPlayer.Builder(getApplicationContext()).build();
                 binding.playerView.setPlayer(player);
+                _setListeners();
                 if(!videoURL.isEmpty()){
                     if(videoURL.contains("index.m3u8")){
+                        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams)binding.playerView.getLayoutParams();
+                        params.dimensionRatio = "3:4";
+                        binding.playerView.setLayoutParams(params);
                         HlsMediaSource hlsMediaSource = new HlsMediaSource.Factory(new DefaultDataSourceFactory(this, "MediaStreaming"))
                                 .createMediaSource(MediaItem.fromUri(videoURL));
                         player.setMediaSource(hlsMediaSource);
@@ -128,6 +138,29 @@ public class  MainActivity extends BaseActivity {
         }
         catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    private void _setListeners() {
+
+        player.addListener(new Player.Listener() {
+            @Override
+            public void onVideoSizeChanged(@NonNull VideoSize videoSize) {
+                adjustPlayerViewSize(videoSize.width, videoSize.height);
+            }
+        });
+    }
+
+    private void adjustPlayerViewSize(int videoWidth, int videoHeight) {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        int screenHeight = displayMetrics.heightPixels;
+        int screenWidth = displayMetrics.widthPixels;
+        if (videoWidth > videoHeight) {
+            // Horizontal video
+            binding.playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIXED_WIDTH);
+        } else {
+            // Vertical video
+            binding.playerView.setVideoSize(screenWidth,screenHeight);
         }
     }
 
