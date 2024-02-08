@@ -1,9 +1,11 @@
 package com.example.mediastreaming;
 
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
@@ -21,4 +23,19 @@ public class BindingAdapters {
             ((ImageView)view).setClipToOutline(val);
         }
     }
+
+    @BindingAdapter("setForeground")
+    public static void setForeground(View view, boolean val){
+        if (view!=null){
+            int color;
+            if (val){
+                color = R.color.purple_200_30;
+            }
+            else{
+                color = R.color.transparent;
+            }
+            view.setForeground(new ColorDrawable(ContextCompat.getColor(view.getContext(),color)));
+        }
+    }
+
 }

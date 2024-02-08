@@ -18,9 +18,32 @@
         tools:layout="@layout/fragment_livestream" />
 
     <fragment
-        android:id="@+id/navigation_blackboard"
-        android:name="com.example.mediastreaming.ui.activities.dashboard.ui.notifications.BlackboardFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_black_board" />
+        android:id="@+id/navigation_classroom"
+        android:name="com.example.mediastreaming.ui.activities.dashboard.ui.classRoom.ClassRoomFragment"
+        android:label="@string/class_room"
+        tools:layout="@layout/fragment_class_room" >
+        <action
+            android:id="@+id/action_navigation_classroom_to_navigation_create_exam"
+            app:destination="@id/navigation_create_exam" />
+        <action
+            android:id="@+id/action_navigation_classroom_to_navigation_my_questions"
+            app:destination="@id/navigation_my_questions" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_create_exam"
+        android:name="com.example.mediastreaming.ui.activities.dashboard.ui.createExam.CreateExamFragment"
+        android:label="Create Exams"
+        tools:layout="@layout/fragment_create_exam"/>
+
+    <fragment
+        android:id="@+id/navigation_my_questions"
+        android:name="com.example.mediastreaming.ui.activities.dashboard.ui.myQuestions.MyQuestionsFragment"
+        android:label="My Questions"
+        tools:layout="@layout/fragment_my_questions"/>
+
+
+
+
 
 </navigation>

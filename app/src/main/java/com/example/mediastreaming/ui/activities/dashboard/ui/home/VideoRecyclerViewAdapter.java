@@ -17,14 +17,14 @@ import java.util.Collections;
 public class VideoRecyclerViewAdapter extends RecyclerView.Adapter<VideoRecyclerViewAdapter.VideoHolder> {
 
     private final OnVideoItemClickListener listener;
-    private ArrayList<VideoRecyclerItem> itemList;
-    public VideoRecyclerViewAdapter(ArrayList<VideoRecyclerItem> itemList, OnVideoItemClickListener listener){
+    private ArrayList<ArrayList<VideoRecyclerItem>> itemList;
+    public VideoRecyclerViewAdapter(ArrayList<ArrayList<VideoRecyclerItem>> itemList, OnVideoItemClickListener listener){
         this.itemList = itemList;
         this.listener = listener;
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public  void updateItems(ArrayList<VideoRecyclerItem> _itemList) {
+    public  void updateItems(ArrayList<ArrayList<VideoRecyclerItem>> _itemList) {
         itemList = _itemList;
         notifyDataSetChanged();
     }
@@ -33,31 +33,19 @@ public class VideoRecyclerViewAdapter extends RecyclerView.Adapter<VideoRecycler
     @Override
     public VideoHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CategoryRecyclerViewBinding binding = CategoryRecyclerViewBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
-        //VideoRecycleviewItemBinding binding = VideoRecycleviewItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
         return new VideoHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VideoHolder holder, @SuppressLint("RecyclerView") int position) {
-        /*holder.binding.setModel(itemList.get(position));
-        holder.binding.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.videoItemClicked(itemList.get(position));
-            }
-        });*/
-
-        ArrayList<VideoRecyclerItem> randomised = itemList;
-        Collections.shuffle(randomised);
-        CategoryRecyclerViewAdapter adapter = new CategoryRecyclerViewAdapter(randomised,listener);
+    public void onBindViewHolder(@NonNull VideoHolder holder, int position) {
+        CategoryRecyclerViewAdapter adapter = new CategoryRecyclerViewAdapter(itemList.get(position),listener);
         holder.binding.recyclerView.setAdapter(adapter);
         holder.binding.recyclerView.setLayoutManager(new LinearLayoutManager(holder.itemView.getContext(),LinearLayoutManager.HORIZONTAL,false));
-
     }
 
     @Override
     public int getItemCount() {
-        return 10;//itemList==null?0:itemList.size();
+        return itemList!=null?itemList.size():0;
     }
 
     public static class VideoHolder extends RecyclerView.ViewHolder {

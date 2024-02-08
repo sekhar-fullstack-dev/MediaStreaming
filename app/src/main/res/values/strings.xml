@@ -54,4 +54,5 @@
     <string name="stream_name">Stream name</string>
     <string name="description">Description</string>
     <string name="create_stream">Create Stream</string>
+    <string name="class_room">Class Room</string>
 </resources>

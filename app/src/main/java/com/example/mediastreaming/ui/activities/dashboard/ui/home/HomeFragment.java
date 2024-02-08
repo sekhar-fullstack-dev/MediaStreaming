@@ -18,12 +18,14 @@ import com.example.mediastreaming.data.models.responses.VideoRecyclerItem;
 import com.example.mediastreaming.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 @UnstableApi
 public class HomeFragment extends Fragment implements VideoRecyclerViewAdapter.OnVideoItemClickListener {
 
     private FragmentHomeBinding binding;
+    private ArrayList<ArrayList<VideoRecyclerItem>> randomisedList = new ArrayList<ArrayList<VideoRecyclerItem>>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -37,13 +39,23 @@ public class HomeFragment extends Fragment implements VideoRecyclerViewAdapter.O
     private void initObservers(HomeViewModel homeViewModel) {
         homeViewModel.getVideoRecyclerViewitemList().observe(requireActivity(), videoRecyclerItems -> {
             if (videoRecyclerItems!=null){
-                updateRecyclerView(videoRecyclerItems);
+                getRandomisedList(videoRecyclerItems);
+                updateRecyclerView();
             }
         });
     }
 
-    private void updateRecyclerView(ArrayList<VideoRecyclerItem> videoRecyclerItems) {
-        ((VideoRecyclerViewAdapter) Objects.requireNonNull(recyclerView().getAdapter())).updateItems(videoRecyclerItems);
+    private void getRandomisedList(ArrayList<VideoRecyclerItem> videoRecyclerItems) {
+        randomisedList = new ArrayList<>();
+        for (int i=0;i<10;i++){
+            ArrayList<VideoRecyclerItem> items = new ArrayList<>(videoRecyclerItems);
+            Collections.shuffle(items);
+            randomisedList.add(items);
+        }
+    }
+
+    private void updateRecyclerView() {
+        ((VideoRecyclerViewAdapter) Objects.requireNonNull(recyclerView().getAdapter())).updateItems(randomisedList);
     }
 
     @Override

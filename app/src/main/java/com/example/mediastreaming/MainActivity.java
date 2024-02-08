@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,20 +16,13 @@ import androidx.media3.common.Player;
 import androidx.media3.common.VideoSize;
 import androidx.media3.common.util.UnstableApi;
 import androidx.media3.common.util.Util;
-import androidx.media3.datasource.DataSource;
 import androidx.media3.datasource.DefaultDataSourceFactory;
-import androidx.media3.datasource.DefaultHttpDataSource;
 import androidx.media3.exoplayer.ExoPlayer;
 import androidx.media3.exoplayer.hls.HlsMediaSource;
-import androidx.media3.exoplayer.source.MediaSource;
-import androidx.media3.extractor.DefaultExtractorsFactory;
-import androidx.media3.extractor.ExtractorsFactory;
 import androidx.media3.ui.AspectRatioFrameLayout;
 
 import com.example.mediastreaming.base.BaseActivity;
-import com.example.mediastreaming.data.utils.EncryptedDatasourceFactory;
 import com.example.mediastreaming.databinding.ActivityMainBinding;
-import com.example.mediastreaming.utils.Constants;
 
 import java.util.Objects;
 
